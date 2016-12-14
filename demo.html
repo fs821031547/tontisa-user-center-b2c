@@ -1,0 +1,60 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="//cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+  <script src="http://malsup.github.io/jquery.form.js"></script>
+</head>
+<body>
+<form id="form"  action="http://api.ipaynow.cn" METHOD="post">
+  功能码：<input type=text name="funcode" value="WP001" readonly/><br>
+  应用ID:<input type=text name="appId" value="1409801351286401" readonly/><br>
+  商户订单号：<input type=text name="mhtOrderNo" value="1481270640141" readonly/><br>
+  商户订单名称：<input type=text name="mhtOrderName" value="merchantTest" readonly/><br>
+  币种：<input type=text name="mhtCurrencyType" value="156" readonly/><br>
+  金额：<input type=text name="mhtOrderAmt" value="1" readonly/><br>
+  订单详情：<input type=text name="mhtOrderDetail" value="mhtOrderDetail" readonly/><br>
+  订单类型：<input type=text name="mhtOrderType" value="01" readonly/><br>
+  订单时间：<input type=text name="mhtOrderStartTime" value="20161209160400" readonly/><br>
+  后台通知URL：<input type=text name="notifyUrl" value="http://localhost:80/cpgatetest/notify" readonly/><br>
+  前台通知URL：<input type=text name="frontNotifyUrl" value="http://localhost:80/cpgatetest/frontnotify" readonly/><br>
+  字符集：<input type=text name="mhtCharset" value="UTF-8" readonly/><br>
+  设备类型：<input type=text name="deviceType" value="02" readonly/><br>
+  现在支付网关号：<input type=text name="payChannelType" value="13"><br>
+  商户保留域：<input type=text name="mhtReserved" value=""><br>
+  签名类型：<input type=text name="mhtSignType" value="MD5" readonly/><br>
+  数字签名：<input type=text name="mhtSignature" value="e6450510fbabcef14732eb05a1852914" readonly/><br>
+
+  <input type="submit" value="submit" id="btnAjaxSubmit" onclick="paySubmit(event)" />
+</form>
+</body>
+<script type="text/javascript">
+  function paySubmit(e){
+
+//    $('#form').ajaxSubmit(function(data){
+//      console.log(data);
+//    });
+//    return false;
+    e.preventDefault();
+    $.ajax({
+
+      type:"post",
+
+      asynch:"false",//并发访问时异步提交
+
+      url:"http://api.ipaynow.cn",
+
+      dataType:"jsonp",//指定返回格式，不指定则返回字符串
+
+      data:$("#form").serialize(),
+
+      success:function(data){
+
+        alert("返回结果集="+data);
+
+      }
+    });
+  }
+
+
+</script>
+</html>
